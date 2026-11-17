@@ -12,7 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ai.FirebaseAI
-import com.google.firebase.ai.ondevice.FirebaseAIOnDevice
 import com.google.firebase.ai.type.GenerativeBackend
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
@@ -81,25 +80,12 @@ class MainActivity : AppCompatActivity() {
             FirebaseApp.initializeApp(this)
             FirebaseAppCheck.getInstance()
                 .installAppCheckProviderFactory(DebugAppCheckProviderFactory.getInstance())
-            val ai = FirebaseAI.getInstance(GenerativeBackend.googleAI())
+            val ai = FirebaseAI.getInstance(backend = GenerativeBackend.googleAI())
             engine.configure(ai)
             statusView.text = getString(R.string.status_ready)
         } catch (t: Throwable) {
             statusView.text = getString(R.string.status_no_firebase)
             sendButton.isEnabled = false
-            return
-        }
-        scope.launch {
-            val available = withContext(Dispatchers.IO) {
-                try {
-                    FirebaseAIOnDevice.checkStatus().name == "AVAILABLE"
-                } catch (t: Throwable) {
-                    false
-                }
-            }
-            if (!available) {
-                statusView.text = getString(R.string.status_no_model)
-            }
         }
     }
 
@@ -119,6 +105,11 @@ class MainActivity : AppCompatActivity() {
                 Bubble(text, "error: ${t.message}", InferenceSource.IN_CLOUD, 0, null, false)
             }
             bubbles.addView(buildBubble(bubble))
+            statusView.text = if (bubble.source == InferenceSource.ON_DEVICE) {
+                getString(R.string.status_ready)
+            } else {
+                getString(R.string.status_no_model)
+            }
             sendButton.isEnabled = true
         }
     }

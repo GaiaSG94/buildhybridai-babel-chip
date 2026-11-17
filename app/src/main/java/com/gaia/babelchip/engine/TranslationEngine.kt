@@ -4,8 +4,8 @@ import com.google.firebase.ai.FirebaseAI
 import com.google.firebase.ai.GenerativeModel
 import com.google.firebase.ai.InferenceMode
 import com.google.firebase.ai.OnDeviceConfig
-import com.google.firebase.ai.PublicPreviewAPI
 import com.google.firebase.ai.type.GenerativeBackend
+import com.google.firebase.ai.type.PublicPreviewAPI
 
 /**
  * Two-stage hybrid translation:

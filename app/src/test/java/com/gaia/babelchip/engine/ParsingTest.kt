@@ -37,7 +37,8 @@ class ParsingTest {
     fun parsesPercentagesAndClamps() {
         assertEquals(0.85, Parsing.parseConfidence("85%"), 0.001)
         assertEquals(0.85, Parsing.parseConfidence("0.85"), 0.001)
-        assertEquals(1.0, Parsing.parseConfidence("7"), 0.001)
+        assertEquals(1.0, Parsing.parseConfidence("150%"), 0.001)
+        assertEquals(0.07, Parsing.parseConfidence("7"), 0.001)
         assertEquals(0.0, Parsing.parseConfidence("nope"), 0.001)
     }
 

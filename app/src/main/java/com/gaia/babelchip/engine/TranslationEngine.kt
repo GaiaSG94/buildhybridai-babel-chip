@@ -52,7 +52,7 @@ class TranslationEngine(
                 val draft = Parsing.parseLocalOutput(
                     model.generateContent(
                         Prompts.buildLocalPrompt(text, sourceLanguage, targetLanguage),
-                    ).text.orEmpty(),
+                    )?.text.orEmpty(),
                 )
                 if (draft.translation.isEmpty()) null else draft
             } catch (t: Throwable) {
@@ -74,7 +74,7 @@ class TranslationEngine(
 
         val cloud = cloudModel?.generateContent(
             Prompts.buildCloudPrompt(text, sourceLanguage, targetLanguage),
-        ).text.orEmpty()
+        )?.text.orEmpty()
         val totalLatency = (System.currentTimeMillis() - started).toInt()
         return Bubble(
             original = text,

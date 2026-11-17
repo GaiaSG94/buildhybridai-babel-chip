@@ -29,6 +29,9 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
+      - name: Permissions
+        run: chmod +x ./gradlew
+
       - name: Tests unitaires
         run: ./gradlew --no-daemon testDebugUnitTest
 

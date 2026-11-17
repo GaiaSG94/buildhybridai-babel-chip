@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Babel Chip</string>
+    <string name="status_loading">Checking the on-device model…</string>
+    <string name="status_ready">On-device model ready — short sentences stay on the phone.</string>
+    <string name="status_no_model">No on-device model here: translations will use the cloud.</string>
+    <string name="status_no_firebase">Firebase is not configured: add app/google-services.json.</string>
+    <string name="input_hint">Say something…</string>
+    <string name="action_send">Translate</string>
+    <string name="badge_local">⚡ LOCAL</string>
+    <string name="badge_cloud">☁ CLOUD</string>
+    <string name="meta_local">%1$d ms · confidence %2$s</string>
+    <string name="meta_cloud">%1$d ms · nuance pass</string>
+    <string name="meta_escalated">%1$d ms · escalated from device (confidence %2$s)</string>
+</resources>
